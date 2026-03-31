@@ -11,7 +11,7 @@ logger = logging.getLogger(__name__)
 
 class SG(Graph):
 
-    def __init__(self, vertices=[], di_edges=set(), bi_edges=set(), ud_edges=set(), **kwargs):
+    def __init__(self, vertices=None, di_edges=None, bi_edges=None, ud_edges=None, **kwargs):  # compat: py313
         """
         Constructor
 
@@ -297,7 +297,7 @@ class SG(Graph):
             # delete undirected edges
             neighbors = [n.name for n in self.vertices[v].neighbors]
             for n in neighbors:
-                if n.fixed:
+                if self.vertices[n].fixed:  # compat: py313 — n is a str name, not Vertex; was AttributeError
                     self.delete_udedge(n, v, recompute=False)
 
         # recompute the districts and blocks as they may have changed

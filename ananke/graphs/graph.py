@@ -10,7 +10,7 @@ from .vertex import Vertex
 
 class Graph:
 
-    def __init__(self, vertices=[], di_edges=set(), bi_edges=set(), ud_edges=set(), **kwargs):
+    def __init__(self, vertices=None, di_edges=None, bi_edges=None, ud_edges=None, **kwargs):  # compat: py313
         """
         Constructor.
 
@@ -19,6 +19,10 @@ class Graph:
         :param bi_edges: iterable of tuples of bidirected edges i.e. (X, Y) = X <-> Y.
         :param ud_edges: iterable of tuples of undirected edges i.e. (X, Y) = X - Y.
         """
+        if vertices is None: vertices = []  # compat: py313
+        if di_edges is None: di_edges = set()  # compat: py313
+        if bi_edges is None: bi_edges = set()  # compat: py313
+        if ud_edges is None: ud_edges = set()  # compat: py313
         assert not kwargs, "Unrecognised kwargs: {}".format(kwargs)
 
         # initialize vertices

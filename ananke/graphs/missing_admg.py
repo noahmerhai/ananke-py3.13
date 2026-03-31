@@ -7,7 +7,7 @@ from .admg import ADMG
 
 class MissingADMG(ADMG):
 
-    def __init__(self, vertices=[], di_edges=set(), bi_edges=set(), **kwargs):
+    def __init__(self, vertices=None, di_edges=None, bi_edges=None, **kwargs):  # compat: py313
         """
         Constructor
 

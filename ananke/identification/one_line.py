@@ -345,12 +345,12 @@ class OnelineAID:
 
         for i, intrinsic_set in enumerate(sorted_intrinsic_sets):
             fixed = sorted_fixing[i]
-            vars = sorted(
+            non_fixed_vars = sorted(  # compat: py313 — renamed from `vars` to avoid shadowing builtin
                 set([v for v in experiments[self.allowed_intrinsic_dict[intrinsic_set]].vertices]) - set(fixed))
             correct_order = self.fixing_orders[self.allowed_intrinsic_dict[intrinsic_set]][
                 frozenset(intrinsic_set) - frozenset(fixed)]
             if len(correct_order):
                 functional += '\u03A6' + ','.join(reversed(correct_order))
-            functional += ' p({0} | do({1}))'.format(",".join(vars), ",".join(fixed))
+            functional += ' p({0} | do({1}))'.format(",".join(non_fixed_vars), ",".join(fixed))
 
         return functional

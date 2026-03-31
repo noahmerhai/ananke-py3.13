@@ -1,0 +1,50 @@
+[build-system]
+requires = ["setuptools>=61", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ananke-causal"
+version = "0.1.5"
+description = "Causal inference with graphical models"
+readme = "README.md"
+license = { file = "COPYING" }
+authors = [
+    { name = "Rohit Bhattacharya", email = "rbhatta8@jhu.edu" },
+    { name = "Jaron Lee" },
+    { name = "Razieh Nabi" },
+]
+requires-python = ">=3.9"
+dependencies = [
+    # networkx intentionally omitted — not imported anywhere in ananke/ source
+    "graphviz>=0.19",
+    "autograd>=1.7",  # 1.7+ required for NumPy 2.x compatibility
+    "scipy>=1.7",
+    "numpy>=1.21",
+    "pandas>=1.3",
+    "statsmodels>=0.13",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7",
+    "pytest-cov>=4",
+    "coverage>=7",
+    "tox>=4",
+    "flake8",
+    "Sphinx",
+    "nbsphinx",
+    "ipykernel",
+    "ipython",
+    "sphinx_rtd_theme",
+    "sphinxcontrib-bibtex",
+]
+
+[project.urls]
+Homepage = "https://gitlab.com/causal/ananke"
+Documentation = "https://ananke.readthedocs.io/en/latest/index.html"
+
+[tool.setuptools.packages.find]
+exclude = ["*.tests", "*.tests.*", "tests.*", "tests"]
+
+[tool.setuptools.package-data]
+"ananke.datasets" = ["simulated/*.csv"]

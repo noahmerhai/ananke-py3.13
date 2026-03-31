@@ -8,7 +8,7 @@ from .admg import ADMG
 
 class BG(ADMG):
 
-    def __init__(self, vertices=[], bi_edges=set(), **kwargs):
+    def __init__(self, vertices=None, bi_edges=None, **kwargs):  # compat: py313
         """
         Constructor.
 

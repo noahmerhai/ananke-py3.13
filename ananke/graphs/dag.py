@@ -11,7 +11,7 @@ logger = logging.getLogger(__name__)
 
 class DAG(ADMG, CG):
 
-    def __init__(self, vertices=[], di_edges=set(), **kwargs):
+    def __init__(self, vertices=None, di_edges=None, **kwargs):  # compat: py313
         """
         Constructor.
 

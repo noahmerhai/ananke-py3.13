@@ -295,6 +295,7 @@ class CausalEffect:
 
         # compute the primal estimates that we use to compute projections
         primal = (indices / prob_T) * Y
+        data = data.copy()  # compat: py313 — avoid mutating caller's DataFrame (pandas CoW)
         data["primal"] = primal
         eif_vec = 0
 
@@ -963,10 +964,11 @@ class CausalEffect:
             model_continuous = self._fit_continuous_glm
 
         # add a column of ones to fit intercept terms
+        data = data.copy()  # compat: py313 — avoid mutating caller's DataFrame (pandas CoW)
         data['ones'] = np.ones(len(data))
 
         # get state space of all variables
-        for colname, colvalues in data.iteritems():
+        for colname, colvalues in data.items():  # compat: py313 — iteritems() removed in pandas 2.0
             if set([0, 1]).issuperset(colvalues.unique()):
                 self.state_space_map_[colname] = "binary"
             else:
